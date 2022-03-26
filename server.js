@@ -1,9 +1,8 @@
 const http = require('http');
-const { v4: uuidv4 } = require('uuid');
-const errHandle = require('./errorHandle');
 const getTodo = require('./getTodo');
 const postTodo = require('./postTodo');
 const { deleteAllTodo, deleteSingleTodo } = require('./deleteTodo');
+const patchTodo = require('./patchTodo');
 const todos = [];
 
 const requestListener = (req, res)=>{
@@ -15,7 +14,7 @@ const requestListener = (req, res)=>{
   }
 
   if(req.url=="/todos" && req.method == "GET"){
-    getTodo(req, res, todos);
+    getTodo(res, todos);
   }else if(req.url=="/todos" && req.method == "POST"){
     postTodo(req, res, todos);
   }else if(req.url=="/todos" && req.method == "DELETE"){
@@ -23,7 +22,7 @@ const requestListener = (req, res)=>{
   }else if(req.url.startsWith("/todos/") && req.method=="DELETE"){
     deleteSingleTodo(req, res, todos);
   }else if(req.url.startsWith("/todos/") && req.method=="PATCH"){
-    // patchTodo.js
+    patchTodo(req, res, todos);
   }else if(req.method == "OPTIONS"){
     res.writeHead(200,headers);
     res.end();

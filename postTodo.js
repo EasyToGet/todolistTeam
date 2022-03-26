@@ -7,13 +7,12 @@ const postTodo = (req, res, todos) => {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'PATCH, POST, GET,OPTIONS,DELETE',
     'Content-Type': 'application/json'
-  }
+  };
   
   let body = "";
-
   req.on('data', chunk => {
     body += chunk;
-  })
+  });
 
   req.on('end', () => {
     try {
